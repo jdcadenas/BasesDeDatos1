@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Digital - Bases de Datos I - UPTAEB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uptae-blue': '#003876',
+                        'uptae-red': '#E63946'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .book-card { transition: all 0.3s ease; }
+        .book-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur shadow-md z-50 border-b-4 border-uptae-red h-16 flex items-center">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="../assets/logo.png" alt="UPTAEB" class="h-8">
+                <div>
+                    <span class="font-black text-uptae-blue text-xs uppercase italic">Biblioteca Digital</span>
+                    <span class="block text-[8px] text-gray-400 font-bold uppercase tracking-widest">PNF Informática • UPTAEB</span>
+                </div>
+            </div>
+            <div class="flex space-x-4 text-[9px] font-black uppercase tracking-widest">
+                <a href="../index.html" class="text-uptae-blue hover:text-uptae-red transition">Inicio</a>
+                <a href="../semana-1-2/" class="text-uptae-blue hover:text-uptae-red transition">Unidad I</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-uptae-blue text-white pt-24 pb-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="inline-block bg-uptae-red text-xs font-black px-6 py-2 rounded-full mb-4 uppercase tracking-widest">Recursos Académicos</div>
+            <h1 class="text-3xl md:text-5xl font-black mb-4 uppercase tracking-tighter italic">Biblioteca de Bases de Datos</h1>
+            <p class="text-lg opacity-80 max-w-2xl mx-auto">Material bibliográfico fundamental para el estudio de la Unidad I y unidades posteriores</p>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="container mx-auto px-4 py-12">
+
+        <!-- Unidad I -->
+        <section class="mb-12">
+            <div class="flex items-center mb-6">
+                <div class="bg-uptae-red text-white w-10 h-10 rounded-xl flex items-center justify-center font-black mr-3">I</div>
+                <h2 class="text-2xl font-black text-uptae-blue uppercase">Unidad I: Fundamentos</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Libro 1 -->
+                <div class="book-card bg-white rounded-2xl shadow-lg border-t-4 border-uptae-blue overflow-hidden">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6">
+                        <div class="flex items-center justify-center h-32">
+                            <svg class="w-20 h-20 text-uptae-blue opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-uptae-blue mb-2 text-sm uppercase line-clamp-2">Fundamentos de Bases de Datos</h3>
+                        <p class="text-xs text-gray-500 mb-4">5ta Edición - Texto fundamental</p>
+                        <a href="Fundamentos de bases de datos (5a. ed.).pdf" target="_blank" class="block w-full text-center bg-uptae-blue hover:bg-uptae-red text-white font-black py-3 rounded-xl transition text-xs uppercase tracking-widest">
+                            📖 Abrir PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Libro 2 -->
+                <div class="book-card bg-white rounded-2xl shadow-lg border-t-4 border-uptae-blue overflow-hidden">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6">
+                        <div class="flex items-center justify-center h-32">
+                            <svg class="w-20 h-20 text-uptae-blue opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-uptae-blue mb-2 text-sm uppercase line-clamp-2">Bases de Datos: Teoría y Praxis</h3>
+                        <p class="text-xs text-gray-500 mb-4">Enfoque práctico y teórico</p>
+                        <a href="Bases_de_Datos_Teoría_y_Praxis.pdf" target="_blank" class="block w-full text-center bg-uptae-blue hover:bg-uptae-red text-white font-black py-3 rounded-xl transition text-xs uppercase tracking-widest">
+                            📖 Abrir PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Libro 3 -->
+                <div class="book-card bg-white rounded-2xl shadow-lg border-t-4 border-uptae-blue overflow-hidden">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6">
+                        <div class="flex items-center justify-center h-32">
+                            <svg class="w-20 h-20 text-uptae-blue opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-uptae-blue mb-2 text-sm uppercase line-clamp-2">Foundations of Database Design</h3>
+                        <p class="text-xs text-gray-500 mb-4">Fundamentos en inglés</p>
+                        <a href="Foundations_of_Database_Design.pdf" target="_blank" class="block w-full text-center bg-uptae-blue hover:bg-uptae-red text-white font-black py-3 rounded-xl transition text-xs uppercase tracking-widest">
+                            📖 Abrir PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documentos de Clase -->
+        <section class="mb-12">
+            <div class="flex items-center mb-6">
+                <div class="bg-uptae-red text-white w-10 h-10 rounded-xl flex items-center justify-center font-black mr-3">📋</div>
+                <h2 class="text-2xl font-black text-uptae-blue uppercase">Documentos de la Cátedra</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Plan de Evaluación -->
+                <div class="book-card bg-white rounded-2xl shadow-lg border-l-4 border-uptae-red p-6">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-black text-uptae-blue mb-2 text-sm uppercase">Plan de Evaluación 2026</h3>
+                            <p class="text-xs text-gray-500 mb-4">Cronograma de evaluaciones y porcentajes</p>
+                            <span class="inline-block bg-red-50 text-uptae-red text-[10px] font-bold px-3 py-1 rounded-full uppercase">Evaluación</span>
+                        </div>
+                        <svg class="w-12 h-12 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <a href="José Cadenas Plan de Evaluación - Base de Datos I-2026 - .pdf" target="_blank" class="mt-4 block w-full text-center bg-uptae-red hover:bg-red-700 text-white font-black py-3 rounded-xl transition text-xs uppercase tracking-widest">
+                        📄 Descargar
+                    </a>
+                </div>
+
+                <!-- Plan de Clases -->
+                <div class="book-card bg-white rounded-2xl shadow-lg border-l-4 border-uptae-blue p-6">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-black text-uptae-blue mb-2 text-sm uppercase">Plan de Clases 2026</h3>
+                            <p class="text-xs text-gray-500 mb-4">Contenido y distribución por semanas</p>
+                            <span class="inline-block bg-blue-50 text-uptae-blue text-[10px] font-bold px-3 py-1 rounded-full uppercase">Académico</span>
+                        </div>
+                        <svg class="w-12 h-12 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <a href="Plan de Clases - Base de Datos I-2026.pdf" target="_blank" class="mt-4 block w-full text-center bg-uptae-blue hover:bg-uptae-red text-white font-black py-3 rounded-xl transition text-xs uppercase tracking-widest">
+                        📄 Descargar
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Presentación de Clase -->
+        <section>
+            <div class="bg-gradient-to-br from-uptae-blue to-blue-900 text-white rounded-3xl p-8 shadow-2xl">
+                <div class="text-center">
+                    <div class="inline-block bg-white/20 text-white text-xs font-black px-6 py-2 rounded-full mb-4 uppercase tracking-widest">Material de Clase</div>
+                    <h2 class="text-2xl md:text-3xl font-black mb-4 uppercase">Presentación Unidad I</h2>
+                    <p class="text-lg opacity-80 mb-6 max-w-xl mx-auto">Diapositivas completas de la Unidad I: Fundamentos de Bases de Datos</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="Unidad I_ Fundamentos de Bases de Datos.pdf" target="_blank" class="bg-uptae-red hover:bg-red-700 text-white font-black py-4 px-8 rounded-2xl transition shadow-xl uppercase text-sm tracking-widest inline-flex items-center">
+                            📊 Ver Presentación
+                        </a>
+                        <a href="../semana-1-2/" class="bg-white/20 hover:bg-white/30 backdrop-blur text-white font-black py-4 px-8 rounded-2xl transition border border-white/30 uppercase text-sm tracking-widest">
+                            🌐 Ver Versión Web
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-12 border-t-8 border-uptae-red">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex items-center justify-center mb-4">
+                <img src="../assets/logo.png" alt="UPTAEB" class="h-8 opacity-50 mr-3">
+                <div>
+                    <p class="font-black text-xs uppercase tracking-widest">PNF Informática - UPTAEB</p>
+                    <p class="text-[9px] opacity-50">Bases de Datos I • 2026</p>
+                </div>
+            </div>
+            <p class="text-[8px] text-gray-500 uppercase tracking-[0.3em]">Universidad Politécnica Territorial Andrés Eloy Blanco • Barquisimeto - Lara</p>
+        </div>
+    </footer>
+
+</body>
+</html>
