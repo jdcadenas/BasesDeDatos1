@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bases de Datos I - UPTAEB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-uptae-blue { background-color: #003876; }
+        .text-uptae-blue { color: #003876; }
+        .bg-uptae-red { background-color: #e63946; }
+        .border-uptae-red { border-color: #e63946; }
+        .card-week { transition: all 0.3s ease; }
+        .card-week:hover { transform: translateY(-10px); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 leading-relaxed">
+
+    <!-- Header / Navbar -->
+    <header class="bg-uptae-blue text-white shadow-xl sticky top-0 z-50 border-b-4 border-uptae-red">
+        <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between">
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="assets/logo.png" alt="Logo UPTAEB" class="h-16 w-auto bg-white p-1 rounded shadow-inner">
+                <img src="assets/pnfilogo.jfif" alt="Logo PNF" class="h-16 w-auto bg-white p-1 rounded shadow-inner">
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black uppercase tracking-tighter italic">Bases de Datos I</h1>
+                    <p class="text-[10px] md:text-xs opacity-80 font-bold tracking-[0.2em] uppercase">PNF Informática - UPTAEB</p>
+                </div>
+            </div>
+            <nav class="flex space-x-8 text-xs font-bold uppercase tracking-widest">
+                <a href="#inicio" class="hover:text-red-400 transition">Inicio</a>
+                <a href="#contenido" class="hover:text-red-400 transition">Semanas (1-16)</a>
+                <a href="material/" class="hover:text-red-400 transition underline decoration-2 underline-offset-4">Biblioteca</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative bg-uptae-blue py-24 text-white overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-30"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <span class="inline-block bg-uptae-red text-xs font-bold px-4 py-1 rounded-full mb-6 uppercase tracking-[0.3em]">Período Académico 2026</span>
+            <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-tight uppercase">Ingeniería de<br><span class="text-red-500 italic">Bases de Datos</span></h2>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 opacity-90 font-light leading-relaxed">
+                Diseño, modelado y administración estratégica de información bajo estándares de Software Libre para el desarrollo tecnológico nacional.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contenido" class="bg-uptae-red hover:bg-red-700 text-white font-black py-4 px-10 rounded-2xl shadow-2xl transition transform hover:scale-105 uppercase text-sm tracking-widest">
+                    Explorar Semanas
+                </a>
+                <a href="material/" class="bg-white/10 hover:bg-white/20 backdrop-blur text-white font-bold py-4 px-10 rounded-2xl border border-white/30 transition text-sm uppercase tracking-widest">
+                    Guía de la Materia
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-6 py-16">
+        
+        <!-- Información General -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-20">
+            <div class="lg:col-span-2 bg-white p-10 rounded-[2rem] shadow-2xl border-l-[12px] border-uptae-red relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-uptae-red opacity-5 rounded-full -mr-10 -mt-10"></div>
+                <h3 class="text-3xl font-black text-uptae-blue mb-6 flex items-center uppercase italic tracking-tighter">
+                    <svg class="w-8 h-8 mr-3 text-uptae-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Propósito Formativo
+                </h3>
+                <div class="space-y-6">
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        Desarrollar en el estudiante habilidades críticas para el <span class="font-bold text-uptae-blue underline decoration-uptae-red decoration-2">diseño lógico y físico</span> de bases de datos, garantizando la integridad, seguridad y eficiencia en el manejo de grandes volúmenes de información.
+                    </p>
+                    <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 flex items-center justify-between">
+                        <div>
+                            <h4 class="font-black text-uptae-blue uppercase text-sm tracking-widest mb-1">Próximo Hito</h4>
+                            <p class="text-gray-500 font-bold">Evaluación Unidad I (Cuestionario)</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-3xl font-black text-uptae-red tracking-tighter">10%</span>
+                            <span class="text-[10px] font-bold text-gray-400 uppercase">Semana 4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-10 rounded-[2rem] shadow-xl border border-gray-100 flex flex-col justify-center items-center text-center">
+                <div class="bg-red-50 p-6 rounded-3xl mb-6 transform -rotate-3">
+                    <svg class="w-16 h-16 text-uptae-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+                <h4 class="font-black text-xl mb-3 text-uptae-blue uppercase tracking-tighter italic">Biblioteca Digital</h4>
+                <p class="text-sm text-gray-400 mb-8 font-medium">Acceso directo a la bibliografía fundamental de la asignatura (Korth, Silberschatz, Codd).</p>
+                <a href="material/" class="bg-uptae-blue hover:bg-uptae-red text-white font-bold py-3 px-8 rounded-xl transition shadow-lg w-full uppercase text-xs tracking-widest">
+                    Entrar a la Biblioteca
+                </a>
+            </div>
+        </div>
+
+        <!-- Cronograma de 16 Semanas -->
+        <div id="contenido" class="mb-10 text-center">
+            <h3 class="text-4xl font-black text-uptae-blue mb-2 uppercase tracking-tighter italic">Cronograma Académico</h3>
+            <p class="text-gray-500 font-bold uppercase text-xs tracking-[0.5em] mb-12">Semestre I - 16 Semanas de Formación</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Semana 1-2: ACTIVA -->
+            <div class="card-week bg-white rounded-3xl overflow-hidden shadow-xl border-2 border-uptae-blue relative flex flex-col">
+                <div class="absolute top-4 left-4 z-20">
+                    <span class="bg-uptae-blue text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">Activo</span>
+                </div>
+                <div class="h-40 bg-gray-200 overflow-hidden relative">
+                    <img src="semana-1-2/images/portada.png" alt="Semana 1-2" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-uptae-blue opacity-10"></div>
+                </div>
+                <div class="p-6 flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-lg font-black text-uptae-blue uppercase leading-tight">Semanas 1 y 2</h4>
+                        <span class="text-uptae-red font-black text-xs">U-I</span>
+                    </div>
+                    <p class="text-xs text-gray-500 font-bold mb-4 italic">Fundamentos y SMBD</p>
+                    <p class="text-[11px] text-gray-400 leading-relaxed mb-6">
+                        Conceptos de James Martín, Reglas de Codd, Evolución de Modelos y SQL Básico.
+                    </p>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="semana-1-2/index.html" class="block w-full text-center bg-uptae-blue hover:bg-uptae-red text-white font-black py-3 rounded-xl transition text-[10px] uppercase tracking-widest">
+                        Abrir Presentación
+                    </a>
+                </div>
+            </div>
+
+            <!-- Semana 3: PRÓXIMAMENTE -->
+            <div class="card-week bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col opacity-60 hover:opacity-100">
+                <div class="h-40 bg-gray-100 flex items-center justify-center relative">
+                    <svg class="w-12 h-12 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h4 class="text-lg font-black text-gray-400 uppercase leading-tight mb-2">Semana 3</h4>
+                    <p class="text-xs text-gray-400 font-bold mb-4 italic">Diseño Conceptual</p>
+                    <p class="text-[11px] text-gray-400 leading-relaxed">Profundización en el Modelo Entidad-Relación (MER) y su importancia en el ciclo de vida.</p>
+                </div>
+                <div class="p-6 pt-0">
+                    <button disabled class="w-full text-center bg-gray-100 text-gray-300 font-black py-3 rounded-xl text-[10px] uppercase tracking-widest cursor-not-allowed">Bloqueado</button>
+                </div>
+            </div>
+
+            <!-- Semana 4: EVALUACIÓN -->
+            <div class="card-week bg-gray-50 rounded-3xl overflow-hidden shadow-sm border border-dashed border-uptae-red/30 flex flex-col">
+                <div class="p-6 flex-grow flex flex-col justify-center text-center">
+                    <div class="bg-red-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-uptae-red font-black">4</div>
+                    <h4 class="text-sm font-black text-gray-500 uppercase mb-2">Semana 4: Evaluación I</h4>
+                    <p class="text-[10px] text-gray-400 font-bold">Unidad I Completa</p>
+                </div>
+            </div>
+
+            <!-- PLACEHOLDERS PARA LAS 16 SEMANAS -->
+            <script>
+                const container = document.currentScript.parentElement;
+                for (let i = 5; i <= 16; i++) {
+                    const div = document.createElement('div');
+                    div.className = "card-week bg-gray-50 rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col items-center justify-center p-8 opacity-40 hover:opacity-80 transition cursor-help";
+                    div.innerHTML = `
+                        <span class="text-2xl font-black text-gray-300 italic mb-1">${i}</span>
+                        <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest text-center leading-tight">Semana ${i}<br>Planificada</span>
+                    `;
+                    container.appendChild(div);
+                }
+            </script>
+
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-16 mt-20 border-t-8 border-uptae-red">
+        <div class="container mx-auto px-6 grid md:grid-cols-3 gap-12 items-center text-center md:text-left">
+            <div>
+                <p class="text-2xl font-black italic mb-2 tracking-tighter uppercase">PNF Informática</p>
+                <p class="text-gray-500 text-sm font-bold uppercase tracking-widest mb-6">Bases de Datos I</p>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <img src="assets/logo.png" alt="Logo UPTAEB" class="h-10 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition">
+                    <img src="assets/pnfilogo.jfif" alt="Logo PNF" class="h-10 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition">
+                </div>
+            </div>
+            <div class="text-center">
+                <p class="text-[10px] text-gray-500 uppercase font-black tracking-[0.3em] mb-4">Sede Central</p>
+                <p class="text-gray-400 text-xs font-medium leading-relaxed">Universidad Politécnica Territorial<br>Andrés Eloy Blanco<br>Barquisimeto - Lara</p>
+            </div>
+            <div class="text-center md:text-right">
+                <p class="text-xs text-gray-500 font-bold mb-4">© 2026 - Repositorio de Cátedra</p>
+                <a href="#" class="text-uptae-red font-black uppercase text-[10px] tracking-widest hover:underline">Políticas de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

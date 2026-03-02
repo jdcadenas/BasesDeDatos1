@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-pt-20">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad I: Fundamentos de Bases de Datos - UPTAEB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uptae-blue': '#003876',
+                        'uptae-red': '#E63946',
+                        'uptae-gold': '#FFD700'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        section { min-height: auto; display: block; border-bottom: 1px solid #edf2f4; padding-top: 6rem; padding-bottom: 4rem; }
+        @media (min-width: 768px) {
+            section { padding-top: 7rem; padding-bottom: 5rem; }
+        }
+        .slide-content { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .slide-active .slide-content { opacity: 1; transform: translateY(0); }
+        .didactic-card { transition: all 0.3s ease; }
+        .didactic-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        .number-badge { background: linear-gradient(135deg, #003876 0%, #1a5f9e 100%); }
+        .highlight-box { background: linear-gradient(135deg, rgba(230,57,70,0.1) 0%, rgba(230,57,70,0.05) 100%); }
+        img { max-height: 60vh; }
+        @media (max-width: 768px) {
+            img { max-height: 40vh; }
+            h1 { font-size: 1.75rem; }
+            h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur shadow-md z-50 border-b-4 border-uptae-red h-20 flex items-center">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="../assets/logo.png" alt="UPTAEB" class="h-12">
+                <div>
+                    <span class="font-black text-uptae-blue text-xs uppercase italic">Unidad I - Fundamentos</span>
+                    <span class="block text-[8px] text-gray-400 font-bold uppercase tracking-widest">PNF Informática • UPTAEB</span>
+                </div>
+            </div>
+            <div class="hidden xl:flex space-x-5 text-[9px] font-black uppercase tracking-widest">
+                <a href="#inicio" class="text-uptae-blue hover:text-uptae-red transition">Inicio</a>
+                <a href="#punto1" class="text-uptae-blue hover:text-uptae-red transition">1. Introducción</a>
+                <a href="#punto2" class="text-uptae-blue hover:text-uptae-red transition">2. Evolución</a>
+                <a href="#punto3" class="text-uptae-blue hover:text-uptae-red transition">3. Conceptos</a>
+                <a href="#punto4" class="text-uptae-blue hover:text-uptae-red transition">4. Modelos</a>
+                <a href="#punto5" class="text-uptae-blue hover:text-uptae-red transition">5. Relacional</a>
+                <a href="#punto6" class="text-uptae-blue hover:text-uptae-red transition">6. Arquitectura</a>
+                <a href="#punto7" class="text-uptae-blue hover:text-uptae-red transition">7. DBA</a>
+                <a href="#punto8" class="text-uptae-blue hover:text-uptae-red transition">8. SQL</a>
+                <a href="#punto9" class="text-uptae-blue hover:text-uptae-red transition">9. Integridad</a>
+                <a href="#punto10" class="text-uptae-blue hover:text-uptae-red transition">10. Transacciones</a>
+                <a href="#punto11" class="text-uptae-blue hover:text-uptae-red transition">11. Codd</a>
+                <a href="#punto12" class="text-uptae-blue hover:text-uptae-red transition">12. Práctica</a>
+            </div>
+            <a href="../index.html" class="bg-uptae-blue text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-uptae-red transition">Menú Principal</a>
+        </div>
+    </nav>
+
+    <!-- 1. PORTADA -->
+    <section id="inicio" class="bg-uptae-blue text-white slide-active relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-uptae-red rounded-full blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-6 py-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="slide-content">
+                    <div class="inline-block bg-uptae-red text-xs font-black px-6 py-2 rounded-full mb-6 uppercase tracking-widest">Unidad I • 2026</div>
+                    <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tighter uppercase italic">
+                        Fundamentos de<br><span class="text-red-400">Bases de Datos</span>
+                    </h1>
+                    <p class="text-base md:text-lg opacity-90 mb-6 font-light leading-relaxed">
+                        12 Puntos Esenciales para comprender la arquitectura, gestión y lenguaje SQL en sistemas de bases de datos modernos.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#punto1" class="bg-uptae-red hover:bg-red-700 px-6 py-3 rounded-xl font-black uppercase text-xs tracking-widest transition shadow-2xl inline-flex items-center">
+                            <span>Comenzar Recorrido</span>
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                        </a>
+                        <a href="#punto11" class="bg-white/10 hover:bg-white/20 backdrop-blur px-6 py-3 rounded-xl font-black uppercase text-xs tracking-widest transition border border-white/30">
+                            Ver Reglas de Codd
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="images/portada.png" alt="Portada Fundamentos" class="rounded-[2rem] shadow-2xl border-8 border-white/20 w-full h-auto object-cover">
+                    <div class="absolute -bottom-4 -left-4 bg-white text-uptae-blue p-4 rounded-xl shadow-2xl">
+                        <p class="text-2xl font-black">12</p>
+                        <p class="text-[9px] font-bold uppercase tracking-widest">Puntos Clave</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUNTO 1: INTRODUCCIÓN Y MOTIVACIÓN -->
+    <section id="punto1" class="bg-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="slide-content">
+                <div class="flex items-center mb-8">
+                    <div class="number-badge w-16 h-16 rounded-2xl flex items-center justify-center text-white font-black text-2xl mr-6 shadow-lg">1</div>
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-black text-uptae-blue uppercase tracking-tighter italic">Introducción y Motivación</h2>
+                        <p class="text-gray-500 font-medium">¿Por qué estudiamos bases de datos?</p>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-12">
+                    <div class="space-y-6">
+                        <div class="highlight-box p-8 rounded-3xl border-l-8 border-uptae-blue">
+                            <h4 class="font-black text-uptae-blue uppercase text-sm mb-4 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                                El Problema Central
+                            </h4>
+                            <p class="text-gray-700 leading-relaxed">
+                                Las organizaciones modernas generan <strong class="text-uptae-red">volúmenes masivos de datos</strong>. Sin una gestión adecuada, esta información se convierte en caos: duplicación, inconsistencia y pérdida de conocimiento valioso.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-2xl">
+                            <h5 class="font-black text-uptae-blue uppercase text-xs mb-3">Objetivos de la Unidad</h5>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li class="flex items-start"><span class="text-uptae-red font-black mr-2">✓</span> Comprender la evolución histórica del manejo de datos</li>
+                                <li class="flex items-start"><span class="text-uptae-red font-black mr-2">✓</span> Dominar los conceptos fundamentales de bases de datos</li>
+                                <li class="flex items-start"><span class="text-uptae-red font-black mr-2">✓</span> Entender la arquitectura ANSI/SPARC</li>
+                                <li class="flex items-start"><span class="text-uptae-red font-black mr-2">✓</span> Aplicar las 12 reglas de Codd</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-uptae-blue to-blue-800 p-8 rounded-3xl text-white">
+                        <h4 class="font-black uppercase text-sm mb-6 text-center">Aplicaciones en la Vida Real</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white/10 p-4 rounded-xl text-center">
+                                <span class="text-3xl block mb-2">🏦</span>
+                                <span class="text-[10px] font-bold uppercase">Banca</span>
+                            </div>
+                            <div class="bg-white/10 p-4 rounded-xl text-center">
+                                <span class="text-3xl block mb-2">🏥</span>
+                                <span class="text-[10px] font-bold uppercase">Salud</span>
+                            </div>
+                            <div class="bg-white/10 p-4 rounded-xl text-center">
+                                <span class="text-3xl block mb-2">🛒</span>
+                                <span class="text-[10px] font-bold uppercase">Comercio</span>
+                            </div>
+                            <div class="bg-white/10 p-4 rounded-xl text-center">
+                                <span class="text-3xl block mb-2">🎓</span>
+                                <span class="text-[10px] font-bold uppercase">Educación</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUNTO 2: EVOLUCIÓN DEL MANEJO DE DATOS -->
+    <section id="punto2" class="bg-gray-50">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="slide-content text-center">
+                <div class="flex items-center justify-center mb-8">
+                    <div class="number-badge w-16 h-16 rounded-2xl flex items-center justify-center text-white font-black text-2xl mr-6 shadow-lg">2</div>
+                    <h2 class="text-3xl md:text-4xl font-black text-uptae-blue uppercase tracking-tighter italic">Evolución del Manejo de Datos</h2>
+                </div>
+                <p class="text-gray-500 mb-12 max-w-2xl mx-auto font-medium text-lg">De la memoria volátil a la persistencia relacional moderna</p>
+                
+                <img src="images/evolucionymanejodatos.png" alt="Infografía Evolución de Datos" class="mx-auto rounded-3xl shadow-2xl mb-16 border-4 border-white max-w-5xl w-full">
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="didactic-card bg-white p-8 rounded-3xl shadow-lg border-t-8 border-gray-300 text-left">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl mr-3">💾</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-sm">Fase 1: Variables y Arreglos</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                            Los primeros programas almacenaban datos en <strong>estructuras de memoria temporal</strong>. Al cerrar el programa, ¡toda la información se perdía!
+                        </p>
+                        <div class="bg-red-50 p-3 rounded-xl">
+                            <p class="text-xs text-red-700 font-bold">⚠ Limitación: Datos volátiles (solo existen mientras el programa se ejecuta)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="didactic-card bg-white p-8 rounded-3xl shadow-lg border-t-8 border-gray-400 text-left">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl mr-3">📁</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-sm">Fase 2: Archivos</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                            Los datos se guardan en <strong>archivos en disco</strong>. Persistencia lograda, pero con graves problemas de organización.
+                        </p>
+                        <div class="bg-orange-50 p-3 rounded-xl">
+                            <p class="text-xs text-orange-700 font-bold">⚠ Problemas: Redundancia, dificultad de acceso concurrente, falta de seguridad</p>
+                        </div>
+                    </div>
+                    
+                    <div class="didactic-card bg-white p-8 rounded-3xl shadow-lg border-t-8 border-uptae-red text-left">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl mr-3">🗄️</span>
+                            <h4 class="font-black text-uptae-red uppercase text-sm">Fase 3: Bases de Datos</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                            Estructura lógica <strong>independiente</strong> de la física. Datos integrados, seguros y accesibles por múltiples usuarios simultáneamente.
+                        </p>
+                        <div class="bg-green-50 p-3 rounded-xl">
+                            <p class="text-xs text-green-700 font-bold">✓ Ventajas: Integridad, seguridad, independencia, acceso concurrente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUNTO 3: CONCEPTOS FUNDAMENTALES -->
+    <section id="punto3" class="bg-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="slide-content">
+                <div class="flex items-center mb-8">
+                    <div class="number-badge w-16 h-16 rounded-2xl flex items-center justify-center text-white font-black text-2xl mr-6 shadow-lg">3</div>
+                    <h2 class="text-3xl md:text-4xl font-black text-uptae-blue uppercase tracking-tighter italic">Concepto y Características de Base de Datos</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-12">
+                    <div>
+                        <img src="images/conceptoBaseDatos.png" alt="Concepto Base de Datos" class="rounded-3xl shadow-2xl border-4 border-gray-100 w-full">
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-uptae-blue text-white p-8 rounded-3xl shadow-xl">
+                            <div class="flex items-center mb-4">
+                                <svg class="w-8 h-8 text-uptae-red mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                                <h4 class="font-black uppercase text-sm">Definición Clásica</h4>
+                            </div>
+                            <blockquote class="italic text-lg leading-relaxed mb-4">
+                                "Colección de datos interrelacionados almacenados en conjunto sin redundancias perjudiciales, para servir a una o más aplicaciones de forma óptima."
+                            </blockquote>
+                            <p class="text-right font-black text-uptae-red uppercase text-xs tracking-widest">— James Martín (1975)</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-blue-50 p-5 rounded-2xl border-l-4 border-uptae-blue">
+                                <span class="text-2xl block mb-2">📋</span>
+                                <h5 class="font-black text-uptae-blue uppercase text-xs mb-1">Metadatos</h5>
+                                <p class="text-xs text-gray-500">Datos sobre los datos (el "catálogo" del sistema)</p>
+                            </div>
+                            <div class="bg-blue-50 p-5 rounded-2xl border-l-4 border-uptae-blue">
+                                <span class="text-2xl block mb-2">🔀</span>
+                                <h5 class="font-black text-uptae-blue uppercase text-xs mb-1">Independencia</h5>
+                                <p class="text-xs text-gray-500">Programas separados del almacenamiento físico</p>
+                            </div>
+                            <div class="bg-blue-50 p-5 rounded-2xl border-l-4 border-uptae-blue">
+                                <span class="text-2xl block mb-2">🛡️</span>
+                                <h5 class="font-black text-uptae-blue uppercase text-xs mb-1">Integridad</h5>
+                                <p class="text-xs text-gray-500">Exactitud y protección de los datos</p>
+                            </div>
+                            <div class="bg-blue-50 p-5 rounded-2xl border-l-4 border-uptae-blue">
+                                <span class="text-2xl block mb-2">👥</span>
+                                <h5 class="font-black text-uptae-blue uppercase text-xs mb-1">Multiusuario</h5>
+                                <p class="text-xs text-gray-500">Acceso concurrente y seguro</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sistema de Base de Datos -->
+                <div class="bg-gray-50 p-10 rounded-3xl">
+                    <h3 class="font-black text-2xl text-uptae-blue mb-8 uppercase italic text-center">Componentes de un Sistema de Base de Datos</h3>
+                    <img src="images/sistemaBaseDatos.png" alt="Sistema de Base de Datos" class="mx-auto rounded-2xl shadow-xl border-2 border-gray-200 mb-8 max-w-4xl w-full">
+                    <div class="grid md:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div class="bg-uptae-blue text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 font-black">1</div>
+                            <h5 class="font-black text-uptae-blue uppercase text-xs mb-2">Datos</h5>
+                            <p class="text-xs text-gray-500">La información almacenada</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-uptae-blue text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 font-black">2</div>
+                            <h5 class="font-black text-uptae-blue uppercase text-xs mb-2">Hardware</h5>
+                            <p class="text-xs text-gray-500">Equipos y almacenamiento</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-uptae-blue text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 font-black">3</div>
+                            <h5 class="font-black text-uptae-blue uppercase text-xs mb-2">Software</h5>
+                            <p class="text-xs text-gray-500">SGBD y aplicaciones</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-uptae-blue text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 font-black">4</div>
+                            <h5 class="font-black text-uptae-blue uppercase text-xs mb-2">Usuarios</h5>
+                            <p class="text-xs text-gray-500">Personas que interactúan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUNTO 4: MODELOS DE DATOS -->
+    <section id="punto4" class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="slide-content">
+                <div class="flex items-center justify-center mb-8">
+                    <div class="bg-gradient-to-r from-uptae-red to-red-600 w-16 h-16 rounded-2xl flex items-center justify-center font-black text-2xl mr-6 shadow-lg">4</div>
+                    <h2 class="text-3xl md:text-4xl font-black text-red-400 uppercase tracking-tighter italic">Modelos de Bases de Datos</h2>
+                </div>
+                <p class="text-gray-400 mb-12 text-center max-w-2xl mx-auto">Formas de estructurar y organizar los datos para representar la realidad</p>
+                
+                <img src="images/modelosdedatosEvolución.png" alt="Evolución de Modelos de Datos" class="mx-auto rounded-3xl shadow-2xl mb-12 border-2 border-white/10 max-w-5xl w-full">
+                
+                <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white/5 p-8 rounded-3xl border border-white/10 hover:border-uptae-red/50 transition">
+                        <div class="text-center mb-4">
+                            <span class="text-5xl">🌳</span>
+                            <h4 class="font-black uppercase text-lg mt-4 text-uptae-red">Modelo Jerárquico</h4>
+                        </div>
+                        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                            Organiza los datos en una <strong>estructura de árbol</strong> con relaciones padre-hijo (1:N). Cada nodo tiene un solo padre.
+                        </p>
+                        <div class="space-y-2">
+                            <p class="text-xs text-green-400">✓ Rápido para relaciones predecibles</p>
+                            <p class="text-xs text-red-400">✗ Rígido, difícil de modificar</p>
+                            <p class="text-xs text-gray-400">• Usado en: IBM IMS (años 60)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white/5 p-8 rounded-3xl border border-white/10 hover:border-uptae-red/50 transition">
+                        <div class="text-center mb-4">
+                            <span class="text-5xl">🕸️</span>
+                            <h4 class="font-black uppercase text-lg mt-4 text-uptae-red">Modelo de Red</h4>
+                        </div>
+                        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                            Estructura de <strong>grafo</strong> que permite múltiples padres por nodo. Más flexible pero muy complejo.
+                        </p>
+                        <div class="space-y-2">
+                            <p class="text-xs text-green-400">✓ Permite relaciones N:N</p>
+                            <p class="text-xs text-red-400">✗ Complejidad de mantenimiento</p>
+                            <p class="text-xs text-gray-400">• Estándar: CODASYL (1969)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-uptae-red/20 to-red-900/20 p-8 rounded-3xl border-2 border-uptae-red shadow-2xl">
+                        <div class="text-center mb-4">
+                            <span class="text-5xl">📊</span>
+                            <h4 class="font-black uppercase text-lg mt-4 text-uptae-red">Modelo Relacional</h4>
+                        </div>
+                        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                            Basado en <strong>tablas</strong> (relaciones) con filas y columnas. Independencia lógica-física total.
+                        </p>
+                        <div class="space-y-2">
+                            <p class="text-xs text-green-400">✓ Simple, potente, estándar actual</p>
+                            <p class="text-xs text-green-400">✓ SQL como lenguaje unificado</p>
+                            <p class="text-xs text-gray-400">• Creador: E.F. Codd (1970)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Modelos Posteriores -->
+                <div class="bg-white/5 p-8 rounded-3xl border border-white/10">
+                    <h4 class="font-black uppercase text-lg mb-6 text-center text-uptae-red">Modelos Modernos (Siglo XXI)</h4>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-white/5 p-5 rounded-2xl">
+                            <h5 class="font-black text-white uppercase text-sm mb-2">📑 Modelo Entidad-Relación</h5>
+                            <p class="text-xs text-gray-400">Herramienta conceptual para diseño (Chen, 1976)</p>
+                        </div>
+                        <div class="bg-white/5 p-5 rounded-2xl">
+                            <h5 class="font-black text-white uppercase text-sm mb-2">📄 Modelo Orientado a Objetos</h5>
+                            <p class="text-xs text-gray-400">Combina BD con programación OO</p>
+                        </div>
+                        <div class="bg-white/5 p-5 rounded-2xl">
+                            <h5 class="font-black text-white uppercase text-sm mb-2">☁️ Modelo NoSQL</h5>
+                            <p class="text-xs text-gray-400">Para big data y aplicaciones web escalables</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUNTO 5: MODELO RELACIONAL DE CODD -->
+    <section id="punto5" class="bg-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="slide-content">
+                <div class="flex items-center mb-8">
+                    <div class="number-badge w-16 h-16 rounded-2xl flex items-center justify-center text-white font-black text-2xl mr-6 shadow-lg">5</div>
+                    <h2 class="text-3xl md:text-4xl font-black text-uptae-blue uppercase tracking-tighter italic">Estructura del Modelo Relacional</h2>
+                </div>
+                <p class="text-gray-500 mb-12 max-w-2xl">Los 4 conceptos fundamentales de Codd (1970)</p>
+                
+                <div class="overflow-x-auto bg-gray-50 p-8 rounded-[2.5rem] shadow-inner mb-12">
+                    <table class="w-full text-left">
+                        <thead class="text-uptae-red border-b-4 border-gray-200">
+                            <tr>
+                                <th class="py-5 px-4 font-black uppercase text-base bg-red-50">Término Formal</th>
+                                <th class="py-5 px-4 font-black uppercase text-base bg-red-50">Término Común</th>
+                                <th class="py-5 px-4 font-black uppercase text-base bg-red-50">Definición</th>
+                                <th class="py-5 px-4 font-black uppercase text-base bg-red-50">Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr class="border-b border-gray-100 hover:bg-blue-50 transition">
+                                <td class="py-5 px-4 font-black text-2xl text-uptae-blue">Relación</td>
+                                <td class="py-5 px-4 text-lg font-bold">Tabla</td>
+                                <td class="py-5 px-4 text-sm">Estructura bidimensional de datos organizados en filas y columnas</td>
+                                <td class="py-5 px-4 text-sm font-mono bg-gray-100 rounded px-3 py-2">Estudiantes</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 hover:bg-blue-50 transition">
+                                <td class="py-5 px-4 font-black text-2xl text-uptae-blue">Tupla</td>
+                                <td class="py-5 px-4 text-lg font-bold">Fila / Registro</td>
+                                <td class="py-5 px-4 text-sm">Instancia única que representa un objeto completo en la tabla</td>
+                                <td class="py-5 px-4 text-sm font-mono bg-gray-100 rounded px-3 py-2">(1, "Juan", "2005)</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 hover:bg-blue-50 transition">
+                                <td class="py-5 px-4 font-black text-2xl text-uptae-blue">Atributo</td>
+                                <td class="py-5 px-4 text-lg font-bold">Columna / Campo</td>
+                                <td class="py-5 px-4 text-sm">Propiedad o característica específica del objeto almacenado</td>
+                                <td class="py-5 px-4 text-sm font-mono bg-gray-100 rounded px-3 py-2">nombre, edad</td>
+                            </tr>
+                            <tr class="hover:bg-blue-50 transition">
+                                <td class="py-5 px-4 font-black text-2xl text-uptae-blue">Dominio</td>
+                                <td class="py-5 px-4 text-lg font-bold">Tipo de Dato</td>
+                                <td class="py-5 px-4 text-sm">Conjunto de valores válidos y permitidos para un atributo</td>
+                                <td class="py-5 px-4 text-sm font-mono bg-gray-100 rounded px-3 py-2">INTEGER, VARCHAR</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <img src="images/modeloRelacional.png" alt="Modelo Relacional Tablas" class="mx-auto rounded-3xl shadow-2xl border-4 border-gray-100 max-w-5xl w-full mb-12">
+                
+                <!-- Conceptos Adicionales -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-uptae-blue">
+                        <h5 class="font-black text-uptae-blue uppercase text-sm mb-3 flex items-center">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center mr-2 text-xs">PK</span>
+                            Clave Primaria
+                        </h5>
+                        <p class="text-sm text-gray-600">Atributo (o conjunto) que identifica <strong>únicamente</strong> cada tupla en una relación. No puede ser NULL.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-uptae-blue">
+                        <h5 class="font-black text-uptae-blue uppercase text-sm mb-3 flex items-center">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center mr-2 text-xs">FK</span>
+                            Clave Foránea
+                        </h5>
+                        <p class="text-sm text-gray-600">Atributo que referencia a la clave primaria de <strong>otra tabla</strong>, estableciendo una relación entre ellas.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-uptae-blue">
+                        <h5 class="font-black text-uptae-blue uppercase text-sm mb-3 flex items-center">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center mr-2 text-xs">∫</span>
+                            Restricciones
+                        </h5>
+                        <p class="text-sm text-gray-600">Reglas que garantizan la <strong>integridad</strong> de los datos (NOT NULL, UNIQUE, CHECK, DEFAULT).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUNTO 6: ARQUITECTURA ANSI/SPARC -->
+    <section id="punto6" class="bg-uptae-blue text-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="slide-content">
+                <div class="flex items-center mb-8">
+                    <div class="bg-gradient-to-r from-uptae-red to-red-600 w-16 h-16 rounded-2xl flex items-center justify-center font-black text-2xl mr-6 shadow-lg">6</div>
+                    <h2 class="text-3xl md:text-4xl font-black uppercase tracking-tighter italic">Arquitectura ANSI/SPARC</h2>
+                </div>
+                <p class="text-gray-300 mb-12 max-w-2xl">Los tres niveles que garantizan la independencia de datos</p>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-12">
+                    <div class="order-2 md:order-1">
+                        <div class="space-y-4">
+                            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl border-l-8 border-red-400 hover:bg-white/20 transition">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h5 class="font-black text-lg uppercase">Nivel Externo</h5>
+                                    <span class="text-3xl font-black opacity-30">👁️</span>
+                                </div>
+                                <p class="text-sm opacity-80 leading-relaxed"><strong>Vistas individuales</strong> para cada usuario o aplicación. Cada usuario ve solo lo que necesita.</p>
+                                <p class="text-xs text-red-300 mt-2 font-bold">Ejemplo: Un estudiante ve sus notas, un profesor ve todas las del curso</p>
+                            </div>
+                            
+                            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl border-l-8 border-red-400 hover:bg-white/20 transition">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h5 class="font-black text-lg uppercase">Nivel Conceptual</h5>
+                                    <span class="text-3xl font-black opacity-30">🧠</span>
+                                </div>
+                                <p class="text-sm opacity-80 leading-relaxed"><strong>Esquema lógico global</strong> de toda la base de datos. Define tablas, relaciones y restricciones.</p>
+                                <p class="text-xs text-red-300 mt-2 font-bold">Ejemplo: Diagrama completo de todas las tablas del sistema</p>
+                            </div>
+                            
+                            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl border-l-8 border-red-400 hover:bg-white/20 transition">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h5 class="font-black text-lg uppercase">Nivel Interno</h5>
+                                    <span class="text-3xl font-black opacity-30">💾</span>
+                                </div>
+                                <p class="text-sm opacity-80 leading-relaxed"><strong>Representación física</strong> de los datos en disco. Índices, organización de archivos, compresión.</p>
+                                <p class="text-xs text-red-300 mt-2 font-bold">Ejemplo: B-trees, hashing, particionamiento</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-1 md:order-2">
+                        <img src="images/sistemaBaseDatos.png" alt="Arquitectura ANSI/SPARC" class="rounded-3xl shadow-2xl bg-white p-6 w-full">
+                    </div>
+                </div>
+                
+                <!-- Independencia de Datos -->
+                <div class="bg-gradient-to-r from-uptae-red/30 to-red-900/30 p-8 rounded-3xl border-2 border-uptae-red">
+                    <h4 class="font-black text-2xl mb-6 uppercase text-center">Tipos de Independencia de Datos</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white/10 p-6 rounded-2xl">
+                            <h5 class="font-black text-uptae-red uppercase text-sm mb-3">Independencia Lógica</h5>
+                            <p class="text-sm opacity-80">Los programas de aplicación <strong>no se ven afectados</strong> por cambios en la estructura lógica (tablas, columnas).</p>
+                        </div>
+                        <div class="bg-white/10 p-6 rounded-2xl">
+                            <h5 class="font-black text-uptae-red uppercase text-sm mb-3">Independencia Física</h5>
+                            <p class="text-sm opacity-80">El nivel conceptual <strong>no se ve afectado</strong> por cambios en el almacenamiento físico (índices, organización).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUNTO 7: ADMINISTRACIÓN Y USUARIOS (DBA) -->
+    <section id="punto7" class="bg-gray-50">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="slide-content">
+                <div class="flex items-center mb-8">
+                    <div class="number-badge w-16 h-16 rounded-2xl flex items-center justify-center text-white font-black text-2xl mr-6 shadow-lg">7</div>
+                    <h2 class="text-3xl md:text-4xl font-black text-uptae-blue uppercase tracking-tighter italic">Administración y Tipos de Usuarios</h2>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-12">
+                    <div>
+                        <img src="images/administraciónFactorhumano.png" alt="Administrador de Base de Datos" class="rounded-[2rem] shadow-2xl border-4 border-white w-full">
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-white p-8 rounded-3xl shadow-xl border-t-8 border-uptae-red">
+                            <h3 class="font-black text-2xl text-uptae-blue mb-4 uppercase">El DBA (Database Administrator)</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed">
+                                El <strong>factor humano crítico</strong>. Sin el DBA, la información más valiosa de la organización está vulnerable. Es el responsable de garantizar disponibilidad, seguridad y rendimiento.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-red-50 p-4 rounded-xl">
+                                    <h6 class="font-black text-uptae-red uppercase text-xs mb-2">🔐 Seguridad</h6>
+                                    <p class="text-xs text-gray-500">Gestión de usuarios y permisos</p>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-xl">
+                                    <h6 class="font-black text-uptae-red uppercase text-xs mb-2">💾 Respaldo</h6>
+                                    <p class="text-xs text-gray-500">Backups y recuperación</p>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-xl">
+                                    <h6 class="font-black text-uptae-red uppercase text-xs mb-2">⚡ Optimización</h6>
+                                    <p class="text-xs text-gray-500">Tuning de consultas</p>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-xl">
+                                    <h6 class="font-black text-uptae-red uppercase text-xs mb-2">📐 Diseño</h6>
+                                    <p class="text-xs text-gray-500">Esquema conceptual</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tipos de Usuarios -->
+                        <div class="bg-uptae-blue text-white p-8 rounded-3xl shadow-xl">
+                            <h4 class="font-black uppercase text-lg mb-4">Clasificación de Usuarios</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <span class="bg-uptae-red text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-sm mr-3 flex-shrink-0">1</span>
+                                    <div>
+                                        <h5 class="font-black text-sm uppercase">Usuarios Naive</h5>
+                                        <p class="text-xs opacity-80">Interactúan mediante aplicaciones predefinidas (ej: cajero bancario)</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-uptae-red text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-sm mr-3 flex-shrink-0">2</span>
+                                    <div>
+                                        <h5 class="font-black text-sm uppercase">Usuarios Avanzados</h5>
+                                        <p class="text-xs opacity-80">Conocen SQL y pueden crear consultas personalizadas</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-uptae-red text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-sm mr-3 flex-shrink-0">3</span>
+                                    <div>
+                                        <h5 class="font-black text-sm uppercase">Programadores</h5>
+                                        <p class="text-xs opacity-80">Desarrollan aplicaciones que acceden a la BD</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-uptae-red text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-sm mr-3 flex-shrink-0">4</span>
+                                    <div>
+                                        <h5 class="font-black text-sm uppercase">DBA</h5>
+                                        <p class="text-xs opacity-80">Administran todo el sistema de BD</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUNTO 8: LENGUAJE SQL -->
+    <section id="punto8" class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="slide-content">
+                <div class="flex items-center justify-center mb-8">
+                    <div class="bg-gradient-to-r from-uptae-red to-red-600 w-16 h-16 rounded-2xl flex items-center justify-center font-black text-2xl mr-6 shadow-lg">8</div>
+                    <h2 class="text-3xl md:text-4xl font-black text-red-400 uppercase tracking-tighter italic">Lenguaje Estándar SQL</h2>
+                </div>
+                <p class="text-gray-400 mb-12 text-center max-w-2xl mx-auto">Structured Query Language - El lenguaje universal para bases de datos relacionales</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-gradient-to-br from-blue-900/50 to-blue-800/30 p-8 rounded-3xl border-b-4 border-blue-400">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl mr-3">🏗️</span>
+                            <h4 class="font-black text-blue-400 text-2xl uppercase">DDL</h4>
+                        </div>
+                        <p class="text-base leading-relaxed opacity-90 mb-4">
+                            <strong>Data Definition Language</strong> - Define y modifica la estructura del esquema de la base de datos.
+                        </p>
+                        <div class="bg-gray-900/50 p-4 rounded-xl">
+                            <p class="text-xs font-mono text-blue-300 mb-2">Comandos principales:</p>
+                            <code class="text-sm font-mono text-white">CREATE • ALTER • DROP • TRUNCATE</code>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-green-900/50 to-green-800/30 p-8 rounded-3xl border-b-4 border-green-400">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl mr-3">📝</span>
+                            <h4 class="font-black text-green-400 text-2xl uppercase">DML</h4>
+                        </div>
+                        <p class="text-base leading-relaxed opacity-90 mb-4">
+                            <strong>Data Manipulation Language</strong> - Gestiona y manipula los registros almacenados en las tablas.
+                        </p>
+                        <div class="bg-gray-900/50 p-4 rounded-xl">
+                            <p class="text-xs font-mono text-green-300 mb-2">Comandos principales:</p>
+                            <code class="text-sm font-mono text-white">SELECT • INSERT • UPDATE • DELETE</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <img src="images/lenguajesql.png" alt="Código SQL Ejemplo" class="mx-auto rounded-3xl shadow-2xl border-4 border-white/10 max-w-4xl w-full mb-12">
+                
+                <!-- Ejemplo Práctico -->
+                <div class="bg-gray-800 p-8 rounded-3xl">
+                    <h4 class="font-black text-xl mb-6 uppercase text-center text-uptae-red">Ejemplo Práctico Completo</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-xs text-gray-400 mb-3 font-bold uppercase">DDL - Crear tabla</p>
+                            <pre class="bg-gray-900 p-4 rounded-xl overflow-x-auto"><code class="language-sql text-sm">CREATE TABLE estudiantes (
+  id INT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  edad INT CHECK (edad >= 16)
+);</code></pre>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400 mb-3 font-bold uppercase">DML - Insertar datos</p>
+                            <pre class="bg-gray-900 p-4 rounded-xl overflow-x-auto"><code class="language-sql text-sm">INSERT INTO estudiantes 
+VALUES (1, 'María Pérez', 20);
+
+SELECT * FROM estudiantes;</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUNTO 9: INTEGRIDAD DE DATOS -->
+    <section id="punto9" class="bg-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="slide-content">
+                <div class="flex items-center mb-8">
+                    <div class="number-badge w-16 h-16 rounded-2xl flex items-center justify-center text-white font-black text-2xl mr-6 shadow-lg">9</div>
+                    <h2 class="text-3xl md:text-4xl font-black text-uptae-blue uppercase tracking-tighter italic">Integridad de Datos</h2>
+                </div>
+                <p class="text-gray-500 mb-12 max-w-2xl">Garantizando la exactitud y consistencia de la información</p>
+                
+                <img src="images/integridadtransacciones.png" alt="Integridad de Datos" class="mx-auto rounded-3xl shadow-2xl border-4 border-gray-100 max-w-5xl w-full mb-12">
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="didactic-card bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-3xl border-l-8 border-uptae-blue">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl mr-3">🔑</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-sm">Integridad de Entidad</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                            La <strong>clave primaria</strong> no puede tener valores NULL y debe ser única para cada tupla.
+                        </p>
+                        <div class="bg-white p-3 rounded-xl">
+                            <code class="text-xs font-mono text-uptae-blue">id INT PRIMARY KEY NOT NULL</code>
+                        </div>
+                    </div>
+                    
+                    <div class="didactic-card bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-3xl border-l-8 border-uptae-red">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl mr-3">🔗</span>
+                            <h4 class="font-black text-uptae-red uppercase text-sm">Integridad Referencial</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                            Las <strong>claves foráneas</strong> deben referenciar valores existentes o ser NULL. Evita "huérfanos" en las relaciones.
+                        </p>
+                        <div class="bg-white p-3 rounded-xl">
+                            <code class="text-xs font-mono text-uptae-red">FOREIGN KEY (dept_id) REFERENCES departamentos(id)</code>
+                        </div>
+                    </div>
+                    
+                    <div class="didactic-card bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-3xl border-l-8 border-green-600">
+                        <div class="flex items-center mb-4">
+                            <span class="text-4xl mr-3">✓</span>
+                            <h4 class="font-black text-green-700 uppercase text-sm">Integridad de Dominio</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                            Los valores de un atributo deben pertenecer al <strong>dominio definido</strong> (tipo de dato y restricciones).
+                        </p>
+                        <div class="bg-white p-3 rounded-xl">
+                            <code class="text-xs font-mono text-green-700">edad INT CHECK (edad >= 0 AND edad <= 120)</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUNTO 10: TRANSACCIONES Y CONCURRENCIA -->
+    <section id="punto10" class="bg-gray-50">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="slide-content">
+                <div class="flex items-center mb-8">
+                    <div class="number-badge w-16 h-16 rounded-2xl flex items-center justify-center text-white font-black text-2xl mr-6 shadow-lg">10</div>
+                    <h2 class="text-3xl md:text-4xl font-black text-uptae-blue uppercase tracking-tighter italic">Transacciones y Control de Concurrencia</h2>
+                </div>
+                <p class="text-gray-500 mb-12 max-w-2xl">Múltiples usuarios accediendo simultáneamente sin conflictos</p>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-12">
+                    <div>
+                        <img src="images/integridadtransacciones.png" alt="Transacciones de Base de Datos" class="rounded-3xl shadow-2xl border-4 border-white w-full">
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white p-8 rounded-3xl shadow-xl border-t-8 border-uptae-blue">
+                            <h4 class="font-black text-xl text-uptae-blue mb-4 uppercase">¿Qué es una Transacción?</h4>
+                            <p class="text-gray-600 leading-relaxed mb-4">
+                                Una <strong>unidad lógica de trabajo</strong> que agrupa operaciones que deben ejecutarse completamente o no ejecutarse ninguna.
+                            </p>
+                            <div class="bg-blue-50 p-4 rounded-xl">
+                                <p class="text-sm font-bold text-uptae-blue mb-2">Ejemplo: Transferencia Bancaria</p>
+                                <ol class="text-xs text-gray-600 space-y-1 list-decimal list-inside">
+                                    <li>Restar $100 de Cuenta A</li>
+                                    <li>Sumar $100 a Cuenta B</li>
+                                    <li><strong>¡Ambas o ninguna!</strong></li>
+                                </ol>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-uptae-blue text-white p-8 rounded-3xl shadow-xl">
+                            <h5 class="font-black uppercase text-sm mb-4 text-uptae-red">Propiedades ACID</h5>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white/10 p-4 rounded-xl">
+                                    <span class="text-2xl font-black text-uptae-red">A</span>
+                                    <p class="text-xs mt-1"><strong>Atómica</strong> - Todo o nada</p>
+                                </div>
+                                <div class="bg-white/10 p-4 rounded-xl">
+                                    <span class="text-2xl font-black text-uptae-red">C</span>
+                                    <p class="text-xs mt-1"><strong>Consistente</strong> - Mantiene reglas</p>
+                                </div>
+                                <div class="bg-white/10 p-4 rounded-xl">
+                                    <span class="text-2xl font-black text-uptae-red">I</span>
+                                    <p class="text-xs mt-1"><strong>Aislada</strong> - Sin interferencias</p>
+                                </div>
+                                <div class="bg-white/10 p-4 rounded-xl">
+                                    <span class="text-2xl font-black text-uptae-red">D</span>
+                                    <p class="text-xs mt-1"><strong>Durable</strong> - Persistente</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comandos de Transacción -->
+                <div class="bg-gray-900 text-white p-8 rounded-3xl">
+                    <h4 class="font-black text-xl mb-6 uppercase text-center">Comandos de Control de Transacciones</h4>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-gray-800 p-6 rounded-2xl text-center">
+                            <code class="text-2xl font-black text-green-400 mb-2 block">COMMIT</code>
+                            <p class="text-sm text-gray-400">Confirma permanentemente los cambios de la transacción</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-2xl text-center">
+                            <code class="text-2xl font-black text-red-400 mb-2 block">ROLLBACK</code>
+                            <p class="text-sm text-gray-400">Deshace todos los cambios de la transacción</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-2xl text-center">
+                            <code class="text-2xl font-black text-blue-400 mb-2 block">SAVEPOINT</code>
+                            <p class="text-sm text-gray-400">Crea un punto de retorno parcial</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUNTO 11: LAS 12 REGLAS DE CODD -->
+    <section id="punto11" class="bg-white">
+        <div class="container mx-auto px-4 py-6 max-w-7xl">
+            <div class="slide-content">
+                <div class="flex items-center mb-6">
+                    <div class="bg-gradient-to-r from-uptae-red to-red-600 w-12 h-12 rounded-xl flex items-center justify-center font-black text-xl mr-4 shadow-lg flex-shrink-0">11</div>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-black text-uptae-blue uppercase tracking-tighter italic">Las 12 Reglas de Codd</h2>
+                        <p class="text-gray-500 text-sm">Criterios para un sistema verdaderamente relacional (1985)</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-uptae-blue to-blue-900 text-white p-6 rounded-2xl mb-8 shadow-lg">
+                    <div class="flex items-center justify-center mb-4">
+                        <img src="../assets/logo.png" alt="UPTAEB" class="h-12 opacity-80 mr-3">
+                        <div class="text-center">
+                            <p class="font-black text-sm uppercase">Edgar F. Codd</p>
+                            <p class="text-xs opacity-80">Padre del Modelo Relacional (1970)</p>
+                        </div>
+                    </div>
+                    <blockquote class="text-center italic text-sm opacity-90 max-w-2xl mx-auto">
+                        "Un sistema de gestión de bases de datos solo puede considerarse relacional si satisface estos doce criterios fundamentales."
+                    </blockquote>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Regla 0 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-red">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-red text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">R0</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">Regla de Fundamentación</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">El sistema debe usar SOLO sus capacidades relacionales para gestionar la base de datos.</p>
+                    </div>
+
+                    <!-- Regla 1 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-blue">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">1</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">Información Explícita</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">Toda la información se representa explícitamente mediante valores en tablas.</p>
+                    </div>
+
+                    <!-- Regla 2 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-blue">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">2</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">Acceso Garantizado</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">Cada dato es accesible mediante: nombre de tabla + clave primaria + nombre de columna.</p>
+                    </div>
+
+                    <!-- Regla 3 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-blue">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">3</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">Tratamiento de NULLs</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">Soporte sistemático para valores NULL (diferente de cadena vacía o cero).</p>
+                    </div>
+
+                    <!-- Regla 4 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-blue">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">4</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">Catálogo Activo</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">La estructura de la BD se almacena en tablas accesibles mediante el mismo lenguaje de consultas.</p>
+                    </div>
+
+                    <!-- Regla 5 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-blue">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">5</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">Sublenguaje Completo</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">Debe existir un lenguaje con DDL, DML, control de transacciones y seguridad.</p>
+                    </div>
+
+                    <!-- Regla 6 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-blue">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">6</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">Actualización de Vistas</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">Las vistas teóricamente actualizables deben poder actualizarse en la práctica.</p>
+                    </div>
+
+                    <!-- Regla 7 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-blue">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">7</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">Inserción/Actualización</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">Soporte para INSERT, UPDATE y DELETE en todos los niveles de usuario.</p>
+                    </div>
+
+                    <!-- Regla 8 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-blue">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">8</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">Independencia Física</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">Los cambios en el almacenamiento físico no afectan a los programas de aplicación.</p>
+                    </div>
+
+                    <!-- Regla 9 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-blue">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">9</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">Independencia Lógica</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">Los cambios en tablas no requieren modificar los programas existentes.</p>
+                    </div>
+
+                    <!-- Regla 10 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-blue">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-blue text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">10</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">Independencia de Integridad</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">Las restricciones de integridad se definen en el lenguaje, no en los programas.</p>
+                    </div>
+
+                    <!-- Regla 11 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-red">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-red text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">11</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">Independencia de Distribución</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">Los usuarios no deben saber si la BD está distribuida en varias ubicaciones.</p>
+                    </div>
+
+                    <!-- Regla 12 -->
+                    <div class="didactic-card bg-white p-4 rounded-xl shadow-lg border-t-4 border-uptae-red">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-uptae-red text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs mr-2 flex-shrink-0">12</span>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs">No Subversión</h4>
+                        </div>
+                        <p class="text-xs text-gray-600">No puede haber acceso de bajo nivel que viole las reglas de seguridad e integridad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUNTO 12: PRÁCTICA INTEGRADORA -->
+    <section id="punto12" class="bg-gray-50">
+        <div class="container mx-auto px-4 py-6 max-w-6xl">
+            <div class="slide-content">
+                <div class="flex items-center mb-6">
+                    <div class="bg-gradient-to-r from-uptae-red to-red-600 w-12 h-12 rounded-xl flex items-center justify-center font-black text-xl mr-4 shadow-lg flex-shrink-0">12</div>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-black text-uptae-blue uppercase tracking-tighter italic">Práctica Integradora</h2>
+                        <p class="text-gray-500 text-sm">Aplicando conceptos en un caso real del PNF</p>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-2xl border-2 border-dashed border-uptae-blue mb-6">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">🎯</span>
+                        <div>
+                            <h3 class="font-black text-lg text-uptae-blue uppercase">Escenario: Sistema de Proyectos</h3>
+                            <p class="text-xs text-gray-600">Crear el esquema para controlar los Proyectos del PNF</p>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs mb-3 flex items-center">
+                                <span class="bg-uptae-blue text-white w-6 h-6 rounded-lg flex items-center justify-center mr-2 text-[10px]">1</span>
+                                Creación de Tablas (DDL)
+                            </h4>
+                            <pre class="bg-gray-900 rounded-xl p-4 shadow-lg overflow-x-auto"><code class="language-sql text-xs">CREATE TABLE proyectos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  titulo VARCHAR(255) NOT NULL,
+  comunidad VARCHAR(150),
+  estado VARCHAR(20)
+);
+
+CREATE TABLE estudiantes (
+  cedula INT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE
+);</code></pre>
+                        </div>
+
+                        <div>
+                            <h4 class="font-black text-uptae-blue uppercase text-xs mb-3 flex items-center">
+                                <span class="bg-uptae-blue text-white w-6 h-6 rounded-lg flex items-center justify-center mr-2 text-[10px]">2</span>
+                                Manipulación (DML)
+                            </h4>
+                            <pre class="bg-gray-900 rounded-xl p-4 shadow-lg overflow-x-auto"><code class="language-sql text-xs">INSERT INTO proyectos 
+VALUES (1, 'Sistema Web', 'Lara', 'activo');
+
+INSERT INTO estudiantes VALUES 
+(12345678, 'María', 'maria@uptaeb.edu.ve');
+
+SELECT * FROM proyectos;</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <img src="images/ejemploIntegrador.png" alt="Resultado Práctica" class="mx-auto rounded-xl shadow-lg border-2 border-gray-200 max-w-full w-full mb-6">
+
+                <!-- Ejercicios Propuestos -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg">
+                    <h4 class="font-black text-lg text-uptae-blue mb-6 uppercase text-center">Ejercicios Propuestos</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-xl border-l-4 border-uptae-blue">
+                            <div class="flex items-center mb-2">
+                                <span class="text-2xl mr-2">📊</span>
+                                <h5 class="font-black text-uptae-blue uppercase text-xs">Básico</h5>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-2">Crear tabla "materias" con código, nombre, créditos.</p>
+                            <a href="#punto8" class="text-[10px] font-bold text-uptae-blue hover:underline">Ver SQL →</a>
+                        </div>
+                        <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-xl border-l-4 border-orange-500">
+                            <div class="flex items-center mb-2">
+                                <span class="text-2xl mr-2">🔗</span>
+                                <h5 class="font-black text-orange-600 uppercase text-xs">Intermedio</h5>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-2">Establecer relaciones con claves foráneas.</p>
+                            <a href="#punto5" class="text-[10px] font-bold text-orange-600 hover:underline">Ver modelo →</a>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-xl border-l-4 border-green-600">
+                            <div class="flex items-center mb-2">
+                                <span class="text-2xl mr-2">🛡️</span>
+                                <h5 class="font-black text-green-700 uppercase text-xs">Avanzado</h5>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-2">Agregar restricciones CHECK y UNIQUE.</p>
+                            <a href="#punto9" class="text-[10px] font-bold text-green-700 hover:underline">Ver integridad →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GUÍA DE ESTUDIO Y CIERRE -->
+    <section class="bg-white">
+        <div class="container mx-auto px-4 py-6 max-w-6xl">
+            <div class="slide-content">
+                <div class="bg-gradient-to-br from-uptae-blue to-blue-900 text-white p-6 rounded-3xl shadow-2xl mb-6">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl md:text-3xl font-black mb-2 uppercase italic">Guía de Evaluación</h2>
+                        <p class="text-sm opacity-80">Preparación para el cuestionario (10%)</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-white/10 backdrop-blur p-5 rounded-2xl">
+                            <div class="flex items-center mb-4">
+                                <span class="text-3xl mr-3">📚</span>
+                                <h3 class="font-black text-base uppercase">Temas del Cuestionario</h3>
+                            </div>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <span class="bg-uptae-red text-white w-5 h-5 rounded-full flex items-center justify-center font-black text-[10px] mr-2 flex-shrink-0">1</span>
+                                    <span class="text-xs">Definición de Base de Datos (James Martín)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-uptae-red text-white w-5 h-5 rounded-full flex items-center justify-center font-black text-[10px] mr-2 flex-shrink-0">2</span>
+                                    <span class="text-xs">Arquitectura ANSI/SPARC (3 niveles)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-uptae-red text-white w-5 h-5 rounded-full flex items-center justify-center font-black text-[10px] mr-2 flex-shrink-0">3</span>
+                                    <span class="text-xs">Funciones del DBA</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-uptae-red text-white w-5 h-5 rounded-full flex items-center justify-center font-black text-[10px] mr-2 flex-shrink-0">4</span>
+                                    <span class="text-xs">Diferencia entre DDL y DML</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-uptae-red text-white w-5 h-5 rounded-full flex items-center justify-center font-black text-[10px] mr-2 flex-shrink-0">5</span>
+                                    <span class="text-xs">12 Reglas de Codd</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-uptae-red text-white w-5 h-5 rounded-full flex items-center justify-center font-black text-[10px] mr-2 flex-shrink-0">6</span>
+                                    <span class="text-xs">Propiedades ACID</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white/10 backdrop-blur p-5 rounded-2xl">
+                            <div class="flex items-center mb-4">
+                                <span class="text-3xl mr-3">💡</span>
+                                <h3 class="font-black text-base uppercase">Consejos</h3>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="bg-white/10 p-3 rounded-xl">
+                                    <p class="text-xs font-bold mb-1">📖 Repasa las imágenes</p>
+                                    <p class="text-[10px] opacity-80">Cada infografía tiene conceptos clave.</p>
+                                </div>
+                                <div class="bg-white/10 p-3 rounded-xl">
+                                    <p class="text-xs font-bold mb-1">✍️ Practica SQL</p>
+                                    <p class="text-[10px] opacity-80">Escribe CREATE TABLE e INSERT 3 veces.</p>
+                                </div>
+                                <div class="bg-white/10 p-3 rounded-xl">
+                                    <p class="text-xs font-bold mb-1">🎯 Entiende conceptos</p>
+                                    <p class="text-[10px] opacity-80">No solo memorices, comprende el por qué.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <img src="images/guiaestudio.png" alt="Guía de Estudio" class="mx-auto rounded-2xl shadow-xl border-2 border-gray-100 max-w-full w-full mb-6">
+
+                <!-- Conclusión -->
+                <div class="text-center">
+                    <img src="images/conclusión.png" alt="Conclusión" class="mx-auto h-24 opacity-40 mb-4">
+                    <h3 class="font-black text-2xl text-uptae-blue mb-3 uppercase">¡Has completado la Unidad I!</h3>
+                    <p class="text-gray-600 mb-6 max-w-xl mx-auto text-sm">
+                        Ahora comprendes los fundamentos: evolución, modelo relacional, SQL, arquitectura ANSI/SPARC y las 12 reglas de Codd.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <a href="../index.html" class="bg-uptae-blue hover:bg-uptae-red text-white font-black py-3 px-6 rounded-xl transition shadow-lg uppercase text-xs tracking-widest">
+                            Inicio
+                        </a>
+                        <a href="../material/" class="bg-white border-2 border-uptae-blue text-uptae-blue hover:bg-uptae-blue hover:text-white font-black py-3 px-6 rounded-xl transition shadow-lg uppercase text-xs tracking-widest">
+                            Biblioteca
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-uptae-blue py-6 text-white text-center">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-center mb-3">
+                <img src="../assets/logo.png" alt="UPTAEB" class="h-8 opacity-80 mr-3">
+                <div>
+                    <p class="font-black text-xs uppercase tracking-widest">PNF Informática - UPTAEB</p>
+                    <p class="text-[9px] opacity-60">Bases de Datos I • 2026</p>
+                </div>
+            </div>
+            <p class="text-[8px] font-black uppercase tracking-[0.3em] opacity-50">UPTAEB • Barquisimeto - Lara</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DE ANIMACIÓN -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('slide-active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
