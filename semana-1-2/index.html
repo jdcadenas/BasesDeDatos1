@@ -1093,7 +1093,7 @@ SELECT * FROM proyectos;</code></pre>
                 <img src="images/guiaestudio.png" alt="Guía de Estudio" class="mx-auto rounded-2xl shadow-xl border-2 border-gray-100 max-w-full w-full mb-6">
 
                 <!-- Conclusión -->
-                <div class="text-center">
+                <div class="text-center mb-12">
                     <img src="images/conclusión.png" alt="Conclusión" class="mx-auto h-24 opacity-40 mb-4">
                     <h3 class="font-black text-2xl text-uptae-blue mb-3 uppercase">¡Has completado la Unidad I!</h3>
                     <p class="text-gray-600 mb-6 max-w-xl mx-auto text-sm">
@@ -1108,11 +1108,54 @@ SELECT * FROM proyectos;</code></pre>
                         </a>
                     </div>
                 </div>
+
+                <!-- AUTOEVALUACIÓN RÁPIDA -->
+                <div id="quiz-section" class="bg-gray-900 rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden text-white">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-uptae-red opacity-10 rounded-full blur-3xl -mr-10 -mt-10"></div>
+                    
+                    <div class="relative z-10 text-center mb-8">
+                        <span class="inline-block bg-green-500 text-black text-[10px] font-black px-3 py-1 rounded-full mb-4 uppercase tracking-widest">Preparación Examen</span>
+                        <h2 class="text-3xl font-black mb-2 uppercase italic tracking-tighter">Simulacro Express</h2>
+                        <p class="text-gray-400 text-sm max-w-lg mx-auto">Pon a prueba tus conocimientos antes de la evaluación real. 10 preguntas aleatorias de la Unidad I.</p>
+                    </div>
+
+                    <!-- Contenedor del Quiz -->
+                    <div id="quiz-container" class="max-w-2xl mx-auto bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                        <div id="quiz-start" class="text-center py-8">
+                            <div class="text-6xl mb-4">⏱️</div>
+                            <h3 class="text-xl font-bold mb-4">¿Listo para comenzar?</h3>
+                            <button onclick="startQuiz()" class="bg-uptae-red hover:bg-red-600 text-white font-black py-3 px-8 rounded-xl transition uppercase text-xs tracking-widest shadow-lg transform hover:scale-105">
+                                Iniciar Test (10 Preguntas)
+                            </button>
+                        </div>
+
+                        <div id="quiz-question" class="hidden">
+                            <div class="flex justify-between items-center mb-6">
+                                <span id="q-counter" class="text-xs font-bold text-gray-500 uppercase tracking-widest">Pregunta 1/10</span>
+                                <span id="q-score" class="text-xs font-bold text-green-400 uppercase tracking-widest">Aciertos: 0</span>
+                            </div>
+                            <h4 id="q-text" class="text-lg md:text-xl font-bold mb-6 leading-relaxed"></h4>
+                            <div id="q-options" class="space-y-3">
+                                <!-- Opciones generadas por JS -->
+                            </div>
+                        </div>
+
+                        <div id="quiz-result" class="hidden text-center py-8">
+                            <div id="result-icon" class="text-6xl mb-4">🏆</div>
+                            <h3 class="text-2xl font-black mb-2 uppercase">Resultados</h3>
+                            <p id="result-text" class="text-gray-400 mb-6">Has acertado X de 10 preguntas.</p>
+                            <button onclick="location.reload()" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl transition uppercase text-xs tracking-widest">
+                                Intentar de Nuevo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer class="bg-uptae-blue py-6 text-white text-center">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-center mb-3">
@@ -1126,8 +1169,9 @@ SELECT * FROM proyectos;</code></pre>
         </div>
     </footer>
 
-    <!-- SCRIPT DE ANIMACIÓN -->
+    <!-- SCRIPT DE QUIZ Y ANIMACIÓN -->
     <script>
+        // Animación de Scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1139,6 +1183,181 @@ SELECT * FROM proyectos;</code></pre>
         document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
         });
+
+        // Lógica del Quiz
+        const questionPool = [
+            {
+                q: "¿Qué diferencia principal existe entre Dato e Información?",
+                options: [
+                    "No hay diferencia, son sinónimos",
+                    "El dato es la materia prima y la información es el dato procesado",
+                    "La información es numérica y el dato es texto",
+                    "El dato es útil y la información no"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Qué propiedad ACID garantiza que una transacción se realiza completamente o no se realiza en absoluto?",
+                options: ["Consistencia", "Aislamiento", "Atomicidad", "Durabilidad"],
+                correct: 2
+            },
+            {
+                q: "¿Cuál es la función principal del DDL (Data Definition Language)?",
+                options: [
+                    "Consultar datos (SELECT)",
+                    "Definir la estructura de la base de datos (CREATE, DROP)",
+                    "Insertar registros (INSERT)",
+                    "Controlar usuarios (GRANT)"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Quién es el responsable principal de la disponibilidad y seguridad de la Base de Datos?",
+                options: ["El Programador Java", "El Usuario Final", "El DBA (Database Administrator)", "El Gerente de Ventas"],
+                correct: 2
+            },
+            {
+                q: "¿Qué significa que una Base de Datos tenga 'Independencia Lógica'?",
+                options: [
+                    "Que funciona sin internet",
+                    "Que los cambios en las tablas no afectan a los programas de aplicación",
+                    "Que los datos están en la nube",
+                    "Que no necesita claves primarias"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Cuál NO es un modelo de base de datos?",
+                options: ["Relacional", "Jerárquico", "De Red", "Hoja de Cálculo de Excel"],
+                correct: 3
+            },
+            {
+                q: "Según la arquitectura ANSI/SPARC, ¿Qué nivel está más cerca del usuario final?",
+                options: ["Nivel Interno", "Nivel Conceptual", "Nivel Externo (Vistas)", "Nivel Físico"],
+                correct: 2
+            },
+            {
+                q: "¿Qué es una Clave Primaria (Primary Key)?",
+                options: [
+                    "Cualquier campo de texto",
+                    "Un campo que identifica de forma única a cada registro",
+                    "Una contraseña de acceso",
+                    "Un campo que puede repetirse"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Qué comando SQL se usa para recuperar datos de una tabla?",
+                options: ["UPDATE", "DELETE", "GET", "SELECT"],
+                correct: 3
+            },
+            {
+                q: "¿Qué es la Redundancia de Datos?",
+                options: [
+                    "Tener copias de seguridad",
+                    "Repetición innecesaria de datos en varios lugares",
+                    "Velocidad de acceso",
+                    "Cifrado de datos"
+                ],
+                correct: 1
+            },
+            {
+                q: "El modelo relacional fue propuesto por:",
+                options: ["Bill Gates", "Edgar F. Codd", "Alan Turing", "Steve Jobs"],
+                correct: 1
+            },
+            {
+                q: "¿Qué garantiza la Integridad Referencial?",
+                options: [
+                    "Que las claves foráneas apunten a registros válidos",
+                    "Que la base de datos sea rápida",
+                    "Que no haya virus",
+                    "Que todos los campos sean números"
+                ],
+                correct: 0
+            }
+        ];
+
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let score = 0;
+
+        function startQuiz() {
+            // Seleccionar 10 preguntas aleatorias
+            currentQuestions = questionPool.sort(() => 0.5 - Math.random()).slice(0, 10);
+            currentIndex = 0;
+            score = 0;
+            
+            document.getElementById('quiz-start').classList.add('hidden');
+            document.getElementById('quiz-question').classList.remove('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (currentIndex >= currentQuestions.length) {
+                showResult();
+                return;
+            }
+
+            const q = currentQuestions[currentIndex];
+            document.getElementById('q-counter').textContent = `Pregunta ${currentIndex + 1}/10`;
+            document.getElementById('q-score').textContent = `Aciertos: ${score}`;
+            document.getElementById('q-text').textContent = q.q;
+            
+            const optionsDiv = document.getElementById('q-options');
+            optionsDiv.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-gray-700 hover:bg-gray-600 p-4 rounded-xl transition text-sm font-medium border border-gray-600 hover:border-uptae-blue";
+                btn.textContent = opt;
+                btn.onclick = () => checkAnswer(idx, q.correct, btn);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, correct, btnElement) {
+            const buttons = document.querySelectorAll('#q-options button');
+            buttons.forEach(b => b.disabled = true); // Bloquear botones
+
+            if (selected === correct) {
+                btnElement.classList.remove('bg-gray-700');
+                btnElement.classList.add('bg-green-600', 'border-green-400');
+                score++;
+            } else {
+                btnElement.classList.remove('bg-gray-700');
+                btnElement.classList.add('bg-red-600', 'border-red-400');
+                // Mostrar la correcta
+                buttons[correct].classList.remove('bg-gray-700');
+                buttons[correct].classList.add('bg-green-600', 'border-green-400');
+            }
+
+            setTimeout(() => {
+                currentIndex++;
+                showQuestion();
+            }, 1500);
+        }
+
+        function showResult() {
+            document.getElementById('quiz-question').classList.add('hidden');
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.classList.remove('hidden');
+            
+            const percentage = (score / 10) * 100;
+            const resultText = document.getElementById('result-text');
+            const resultIcon = document.getElementById('result-icon');
+
+            if (percentage >= 80) {
+                resultIcon.textContent = "🏆";
+                resultText.innerHTML = `<span class="text-green-400 font-bold">¡Excelente!</span><br>Has acertado ${score} de 10 (${percentage}%).<br>Estás listo para el examen.`;
+            } else if (percentage >= 50) {
+                resultIcon.textContent = "👍";
+                resultText.innerHTML = `<span class="text-yellow-400 font-bold">Bien hecho</span><br>Has acertado ${score} de 10 (${percentage}%).<br>Repasa un poco más los conceptos.`;
+            } else {
+                resultIcon.textContent = "📚";
+                resultText.innerHTML = `<span class="text-red-400 font-bold">Necesitas estudiar</span><br>Has acertado ${score} de 10 (${percentage}%).<br>Vuelve a leer el material de la unidad.`;
+            }
+        }
     </script>
 </body>
 </html>
